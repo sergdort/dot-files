@@ -27,6 +27,10 @@ npx skills add sergdort/dot-files --skill grill-me-product
 npx skills add sergdort/dot-files --skill grill-me-architecture
 ```
 
+## Credits
+
+Both skills are adapted from the original `grill-me` skill by [Matt Pocock](https://github.com/mattpocock) ([mattpocock/skills](https://github.com/mattpocock/skills)), introduced in [this video](https://youtu.be/EJyuu6zlQCg). Refined with Claude for product and architecture use cases.
+
 ## License
 
 MIT
