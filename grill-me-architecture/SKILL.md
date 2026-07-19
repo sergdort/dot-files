@@ -18,6 +18,7 @@ Optimize for decision quality.
 - Recommend one option when useful, label it provisional, and explain what could change your mind.
 - Interrogate the design, not the user. Be direct, rigorous, and collaborative.
 - Do not jump from discussion into implementation planning until the important architecture decisions have been explored.
+- When principles collide (DRY vs locality, YAGNI vs bound-everything, simplicity vs resilience), break the tie by blast radius: who controls the input, and how wide does failure spread? If the input is external and the radius is wide, pay the cost now; if contained and self-controlled, defer and say why.
 
 ## What Not To Do
 
@@ -153,7 +154,7 @@ Look for:
 - temporal decomposition instead of information-hiding decomposition
 - pass-through layers
 - broad configuration surfaces with unclear ownership
-- abstractions justified only by hypothetical future reuse
+- abstractions justified only by hypothetical future reuse; a seam earns its place only when the user can name the second concrete thing that will go through it
 - coupling between things that change at different rates
 
 Ask which complexity is essential, which is accidental, and which interface exports too much knowledge to callers.
@@ -174,6 +175,14 @@ Stress along these axes:
 - future evolution without a rewrite
 
 Prefer realistic failure scenarios over abstract ones.
+
+Questions worth asking near-verbatim when the branch fits:
+
+- When the riskiest dependency fails, what is the smallest thing we lose — a feature or the milestone? Was that decided here, or is it being left for the pager?
+- Is the rollback a scalpel or a demolition? Can every increment ship and revert independently?
+- What is the maximum this can grow to, who controls that growth, and where does it split when it crosses the line?
+- If two versions of this fact disagreed at 3am, which one is authoritative, and is the other clearly marked as derived?
+- Which assumption, if wrong, changes the approach or the date — and has it actually been verified rather than remembered?
 
 ## Phase 5: Convergence Gate
 
